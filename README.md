@@ -1,6 +1,6 @@
 # sudofox/weight
 
-Weight tracking with git
+Weight tracking with bash
 
 Will nag you to update your weight every day.
 
