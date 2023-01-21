@@ -4,9 +4,13 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 TODAY=$(printf '%(%Y-%m-%d)T\n' -1)
 JOURNAL_FILE="$DIR/../data/weight.csv"
 
+COLOR_GREEN="\e[92m"
+COLOR_AQUA="\e[36m"
+COLOR_RESET="\e[0m"
+
 # validate the command line argument is a number
 if ! [[ "$1" =~ ^[0-9]+([.][0-9]+)?$ ]]; then
-  echo "Usage: $0 <weight in lbs>"
+  echo -e "${COLOR_GREEN}Usage: $0 <weight in lbs>${COLOR_RESET}"
   exit 1
 fi
 
@@ -29,12 +33,12 @@ friendly_status() {
   LW_DELTA_POUNDS=$(echo "$LAST_WEIGHT" | awk -F, '{print $4}')
   LW_DELTA_KILOGRAMS=$(echo "$LAST_WEIGHT" | awk -F, '{print $5}')
   LW_DELTA_PLUS_OR_MINUS=$(echo "$LW_DELTA_POUNDS" | awk '{if ($1 < 0) print "-"; else print "+"}')
-  echo "Current weight: $LW_POUNDS lbs ($LW_KILOGRAMS kg) measured on $LW_DATE ($LW_DELTA_PLUS_OR_MINUS$LW_DELTA_POUNDS lbs/$LW_DELTA_KILOGRAMS kg)"
+  echo -e "${COLOR_AQUA}Current weight: $LW_POUNDS lbs ($LW_KILOGRAMS kg) measured on $LW_DATE ($LW_DELTA_PLUS_OR_MINUS$LW_DELTA_POUNDS lbs/$LW_DELTA_KILOGRAMS kg)${COLOR_RESET}"
 }
 
 # if there's already an entry for today, exit
 if grep -q "$TODAY" "$JOURNAL_FILE"; then
-  echo "Weight already entered for today :)"
+  echo -e "${COLOR_GREEN}Weight already entered for today :)${COLOR_RESET}"
   friendly_status
   exit 0
 fi
