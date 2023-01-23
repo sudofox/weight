@@ -32,8 +32,8 @@ friendly_status() {
   LW_KILOGRAMS=$(echo "$LAST_WEIGHT" | awk -F, '{print $3}')
   LW_DELTA_POUNDS=$(echo "$LAST_WEIGHT" | awk -F, '{print $4}')
   LW_DELTA_KILOGRAMS=$(echo "$LAST_WEIGHT" | awk -F, '{print $5}')
-  LW_DELTA_PLUS_OR_MINUS=$(echo "$LW_DELTA_POUNDS" | awk '{if ($1 < 0) print "-"; else print "+"}')
-  echo -e "${COLOR_AQUA}Current weight: $LW_POUNDS lbs ($LW_KILOGRAMS kg) measured on $LW_DATE ($LW_DELTA_PLUS_OR_MINUS$LW_DELTA_POUNDS lbs/$LW_DELTA_KILOGRAMS kg)${COLOR_RESET}"
+  LW_DELTA_PLUS_OR_MINUS=$(echo "$LW_DELTA_POUNDS" | awk '{if ($1 < 0) print ""; else print "+"}')
+  echo -e "${COLOR_AQUA}Current weight: $LW_POUNDS lbs ($LW_KILOGRAMS kg) measured on $LW_DATE ($LW_DELTA_PLUS_OR_MINUS$LW_DELTA_POUNDS lbs/$LW_DELTA_PLUS_OR_MINUS$LW_DELTA_KILOGRAMS kg)${COLOR_RESET}"
 }
 
 # if there's already an entry for today, exit
